@@ -1,0 +1,26 @@
+(gdb) set architecture i8086
+warning: A handler for the OS ABI "GNU/Linux" is not built into this configuration
+of GDB.  Attempting to continue with the default i8086 settings.
+
+The target architecture is set to "i8086".
+(gdb) target remote localhost:1234
+Remote debugging using localhost:1234
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x0000fff0 in ?? ()
+(gdb) br *0x7C00
+Breakpoint 1 at 0x7c00
+(gdb) c
+Continuing.
+
+Breakpoint 1, 0x00007c00 in ?? ()
+(gdb) x/i $eip
+=> 0x7c00:    jmp    0x7c0e
+(gdb) ni
+0x00007c0e in ?? ()
+(gdb) x/i $eip
+=> 0x7c0e:    cli    
+(gdb) ni
+0x00007c0f in ?? ()
+(gdb) x/i $eip
+=> 0x7c0f:    xor    %eax,%eax
